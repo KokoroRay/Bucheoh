@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './layouts';
 import { Hero, AboutSection, ProductGallery, BlogSection, LoadingSpinner, NotFound } from './components';
 import { ContactPage, FAQPage, BlogPage } from './pages';
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <LanguageProvider>
-      <Router basename="/Bucheoh/">
+      <Router>
         <MainLayout logoSrc={logoImage}>
           <Routes>
             <Route path="/" element={<HomePage />} />

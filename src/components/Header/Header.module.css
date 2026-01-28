@@ -147,6 +147,13 @@
     transition: all var(--transition-fast);
 }
 
+.navLink:not(a) {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
 .navLink::after {
     content: '';
     position: absolute;

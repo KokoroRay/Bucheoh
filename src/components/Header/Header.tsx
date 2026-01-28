@@ -78,6 +78,10 @@ export const Header = ({ logoSrc }: HeaderProps) => {
         }
     };
 
+    const handleHomeClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const navItems = [
         { label: t('nav.home'), href: '/', icon: FaHome },
         { label: t('nav.products'), href: '#products', icon: FaBoxOpen },
@@ -101,10 +105,10 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                     )}
                 </div>
 
-                {/* Desktop Navigation */}
                 <nav className={styles.desktopNav}>
                     <ul className={styles.desktopNavList}>
                         {navItems.map((item) => {
+                            const isHome = item.href === '/';
                             const isExternalLink = item.href.startsWith('#');
                             return (
                                 <li key={item.label}>
@@ -115,7 +119,15 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                                                 handleScrollToSection(item.href);
                                             }}
                                             className={styles.navLink}
-                                            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem 0' }}
+                                        >
+                                            {item.label}
+                                        </button>
+                                    ) : isHome ? (
+                                        <button 
+                                            onClick={handleHomeClick}
+                                            className={styles.navLink}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem 0' }}
                                         >
                                             {item.label}
                                         </button>
@@ -156,6 +168,7 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                 <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
                     <ul className={styles.navList}>
                         {navItems.map((item) => {
+                            const isHome = item.href === '/';
                             const isExternalLink = item.href.startsWith('#');
                             return (
                                 <li key={item.label}>
@@ -164,6 +177,19 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 handleScrollToSection(item.href);
+                                                setIsMenuOpen(false);
+                                            }}
+                                            className={styles.navLink}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}
+                                        >
+                                            <item.icon className={styles.navIcon} />
+                                            <span className={styles.navText}>{item.label}</span>
+                                        </button>
+                                    ) : isHome ? (
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleHomeClick();
                                                 setIsMenuOpen(false);
                                             }}
                                             className={styles.navLink}
