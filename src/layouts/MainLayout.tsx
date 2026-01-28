@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 import { Header } from '../components/Header';
+import { BackToTop } from '../components/BackToTop';
+import { Footer } from '../components/Footer';
 import styles from './MainLayout.module.css';
 
 interface MainLayoutProps {
@@ -12,6 +14,8 @@ export const MainLayout = ({ children, logoSrc }: MainLayoutProps) => {
         <div className={styles.layout}>
             <Header logoSrc={logoSrc} />
             <main className={styles.main}>{children}</main>
+            <Footer />
+            <BackToTop showAfter={300} />
         </div>
     );
 };

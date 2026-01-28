@@ -74,6 +74,7 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    height: 100%;
 }
 
 body {
@@ -83,6 +84,8 @@ body {
     color: var(--color-black);
     background-color: var(--color-white);
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* Typography */

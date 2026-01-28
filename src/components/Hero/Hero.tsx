@@ -6,12 +6,12 @@ interface HeroProps {
 
 export const Hero = ({ imageSrc }: HeroProps) => {
     return (
-        <section className={styles.hero}>
+        <section className={styles.hero} id="home">
             {imageSrc && (
                 <div className={styles.imageWrapper}>
                     <img
                         src={imageSrc}
-                        alt="Hero Banner"
+                        alt="BUCHAOH - Nước Trái Cây Lên Men"
                         className={styles.image}
                     />
                 </div>

@@ -14,9 +14,9 @@ export const Footer = () => {
                     {/* Brand Section - Giữ nguyên */}
                     <div className={styles.brandSection}>
                         <h3 className={styles.brandName}>BUCHAOH</h3>
-                        <p className={styles.brandTagline}>Từ lên men xanh đến mùa vụ lành</p>
+                        <p className={styles.brandTagline}>Nước Trái Cây Lên Men Từ Men Vi Sinh</p>
                         <p className={styles.description}>
-                            Thương hiệu cung cấp nước và phân bón sinh học từ quá trình lên men trái cây với men vi sinh tự nhiên.
+                            Sản phẩm nước trái cây lên men tự nhiên với men vi sinh có lợi, mang đến giải pháp chăm sóc sức khỏe và thân thiện với môi trường.
                         </p>
                     </div>
 
@@ -72,10 +72,10 @@ export const Footer = () => {
 
                 <div className={styles.divider}></div>
 
-                {/* Bottom Section - Giữ nguyên */}
+                {/* Bottom Section */}
                 <div className={styles.bottom}>
-                    <p className={styles.copyright}>© {currentYear} BUCHAOH. All rights reserved.</p>
-                    <p className={styles.credits}>Developed by FPT Students</p>
+                    <p className={styles.copyright}>© {currentYear} BUCHAOH - Nước Trái Cây Lên Men Tự Nhiên</p>
+                    <p className={styles.credits}>Made with ❤️ by BUCHAOH Team</p>
                 </div>
             </div>
         </footer>

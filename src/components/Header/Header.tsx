@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { SearchBox } from '../SearchBox';
+import { LanguageSwitcher } from '../LanguageSwitcher';
 
 interface HeaderProps {
     logoSrc?: string;
@@ -54,9 +55,11 @@ export const Header = ({ logoSrc }: HeaderProps) => {
     };
 
     const navItems = [
+        { label: 'TRANG CHỦ', href: '#home' },
+        { label: 'GIỚI THIỆU', href: '#about' },
         { label: 'SẢN PHẨM', href: '#products' },
-        { label: 'VỀ GIỚI THIỆU', href: '#about' },
-        { label: 'BLOG', href: '#blog' },
+        { label: 'QUY TRÌNH', href: '#process' },
+        { label: 'TIN TỨC', href: '#news' },
         { label: 'LIÊN HỆ', href: '#contact' },
     ];
 
@@ -64,7 +67,7 @@ export const Header = ({ logoSrc }: HeaderProps) => {
         <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
             <div className={styles.container}>
                 <div className={styles.logo}>
-                    {logoSrc && <img src={logoSrc} alt="FPT Polytechnic Logo" />}
+                    {logoSrc && <img src={logoSrc} alt="BUCHAOH Logo" />}
                 </div>
 
                 {/* Desktop Navigation */}
@@ -83,6 +86,11 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                 {/* Search Box */}
                 <div className={styles.searchContainer}>
                     <SearchBox onSearch={handleSearch} />
+                </div>
+
+                {/* Language Switcher */}
+                <div className={styles.languageContainer}>
+                    <LanguageSwitcher />
                 </div>
 
                 {/* Hamburger Button */}
