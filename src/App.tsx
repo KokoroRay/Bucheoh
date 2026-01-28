@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MainLayout } from './layouts';
+import { Hero } from './components/Hero';
+import { AboutSection } from './components/AboutSection';
+import { ProductGallery } from './components/ProductGallery';
+import { BlogSection } from './components/BlogSection';
+import { Footer } from './components/Footer';
+
+// Import images
+import logoImage from '../Logo_Trường_Đại_học_FPT.svg 1.png';
+// Sử dụng images từ folder Desktop
+import image1 from './pages/Desktop/image-1.png';
+import image2 from './pages/Desktop/image-2.png';
+import image3 from './pages/Desktop/image-3.png';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <MainLayout logoSrc={logoImage}>
+      <Hero imageSrc={image1} />
+      <AboutSection leftImageSrc={image2} bottomImageSrc={image3} />
+      <ProductGallery />
+      <BlogSection />
+      <Footer />
+    </MainLayout>
+  );
 }
 
-export default App
+export default App;

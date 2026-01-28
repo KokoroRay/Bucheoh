@@ -1,0 +1,34 @@
+.hero {
+    position: relative;
+    height: 600px;
+    margin-top: 88px;
+    overflow: hidden;
+}
+
+.imageWrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        height: 400px;
+        margin-top: 72px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 300px;
+    }
+}
