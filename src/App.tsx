@@ -5,18 +5,17 @@ import { ProductGallery } from './components/ProductGallery';
 import { BlogSection } from './components/BlogSection';
 import { Footer } from './components/Footer';
 
-// Import images
-import logoImage from '../Logo_Trường_Đại_học_FPT.svg 1.png';
-// Sử dụng images từ folder Desktop
-import image1 from './pages/Desktop/image-1.png';
-import image2 from './pages/Desktop/image-2.png';
-import image3 from './pages/Desktop/image-3.png';
+// Import images from assets
+import logoImage from './assets/logos/fpt-logo.png';
+import heroImage from './assets/images/hero/hero-image.png';
+import aboutImage1 from './assets/images/about/about-1.png';
+import aboutImage2 from './assets/images/about/about-2.png';
 
 function App() {
   return (
     <MainLayout logoSrc={logoImage}>
-      <Hero imageSrc={image1} />
-      <AboutSection leftImageSrc={image2} bottomImageSrc={image3} />
+      <Hero imageSrc={heroImage} />
+      <AboutSection leftImageSrc={aboutImage1} bottomImageSrc={aboutImage2} />
       <ProductGallery />
       <BlogSection />
       <Footer />
