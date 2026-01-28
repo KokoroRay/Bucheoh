@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { SearchBox } from '../SearchBox';
 
 interface HeaderProps {
     logoSrc?: string;
@@ -46,6 +47,12 @@ export const Header = ({ logoSrc }: HeaderProps) => {
         };
     }, [isMenuOpen]);
 
+    const handleSearch = (query: string) => {
+        console.log('Searching for:', query);
+        // TODO: Implement search functionality
+        // Could filter products, blog posts, etc.
+    };
+
     const navItems = [
         { label: 'SẢN PHẨM', href: '#products' },
         { label: 'VỀ GIỚI THIỆU', href: '#about' },
@@ -60,6 +67,24 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                     {logoSrc && <img src={logoSrc} alt="FPT Polytechnic Logo" />}
                 </div>
 
+                {/* Desktop Navigation */}
+                <nav className={styles.desktopNav}>
+                    <ul className={styles.desktopNavList}>
+                        {navItems.map((item) => (
+                            <li key={item.label}>
+                                <a href={item.href} className={styles.navLink}>
+                                    {item.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+
+                {/* Search Box */}
+                <div className={styles.searchContainer}>
+                    <SearchBox onSearch={handleSearch} />
+                </div>
+
                 {/* Hamburger Button */}
                 <button
                     className={styles.hamburger}
@@ -69,7 +94,7 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                     {isMenuOpen ? <FaTimes /> : <FaBars />}
                 </button>
 
-                {/* Navigation */}
+                {/* Mobile Navigation */}
                 <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
                     <ul className={styles.navList}>
                         {navItems.map((item) => (

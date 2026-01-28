@@ -1,0 +1,121 @@
+.searchBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all var(--transition-base);
+}
+
+.searchToggle {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+    z-index: 10;
+}
+
+.searchToggle:hover {
+    background-color: rgba(239, 120, 154, 0.1);
+    color: var(--color-primary-dark);
+    transform: scale(1.1);
+}
+
+.searchForm {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background: var(--color-white);
+    border-radius: 25px;
+    box-shadow: var(--shadow-lg);
+    padding: 0.3rem;
+    min-width: 280px;
+    border: 2px solid var(--color-primary);
+    animation: expandIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    color: var(--color-gray-500);
+    background: transparent;
+}
+
+.searchInput::placeholder {
+    color: var(--color-gray-400);
+}
+
+.clearButton,
+.submitButton {
+    background: none;
+    border: none;
+    color: var(--color-gray-400);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.clearButton:hover {
+    color: var(--color-primary);
+    background-color: rgba(239, 120, 154, 0.1);
+}
+
+.submitButton {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    margin-left: 0.2rem;
+}
+
+.submitButton:hover {
+    background-color: var(--color-primary-dark);
+    transform: scale(1.05);
+}
+
+@keyframes expandIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .searchForm {
+        min-width: 250px;
+        right: -10px;
+    }
+    
+    .searchInput {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .searchForm {
+        min-width: 200px;
+        right: -20px;
+    }
+    
+    .searchInput {
+        font-size: 0.8rem;
+    }
+}
