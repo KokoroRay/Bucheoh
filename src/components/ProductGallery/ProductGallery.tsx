@@ -37,7 +37,6 @@ export const ProductGallery = () => {
             const clickedCard = cards[index] as HTMLElement;
 
             if (clickedCard) {
-                const trackRect = track.getBoundingClientRect();
                 const cardRect = clickedCard.getBoundingClientRect();
                 const cardCenter = cardRect.left + cardRect.width / 2;
                 const viewportCenter = window.innerWidth / 2;
