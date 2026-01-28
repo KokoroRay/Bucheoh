@@ -223,6 +223,19 @@
     font-weight: 700;
 }
 
+/* Blog Actions */
+.blogActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.shareButtons {
+    flex-shrink: 0;
+}
+
 /* Navigation Dots */
 .dotsContainer {
     display: flex;

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './LanguageSwitcher.module.css';
 
 interface Language {
@@ -8,7 +9,7 @@ interface Language {
 }
 
 export const LanguageSwitcher = () => {
-    const [currentLang, setCurrentLang] = useState<string>('vi');
+    const { language, setLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const languages: Language[] = [
@@ -16,39 +17,66 @@ export const LanguageSwitcher = () => {
         { code: 'en', name: 'English', flag: '🇺🇸' },
     ];
 
-    const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
+    const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
 
     const handleLanguageChange = (langCode: string) => {
-        setCurrentLang(langCode);
+        if (langCode === language) return;
+        
+        setLanguage(langCode);
         setIsOpen(false);
-        // TODO: Add actual language switching logic here
-        console.log(`Switched to language: ${langCode}`);
     };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (isOpen && !target.closest(`.${styles.languageSwitcher}`)) {
+                setIsOpen(false);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen]);
 
     return (
         <div className={styles.languageSwitcher}>
-            <button 
-                className={styles.currentLanguage}
+            <button
+                className={styles.languageButton}
                 onClick={() => setIsOpen(!isOpen)}
-                aria-label="Chọn ngôn ngữ"
+                aria-label="Change language"
+                aria-expanded={isOpen}
             >
-                <span className={styles.flag}>{currentLanguage.flag}</span>
-                <span className={styles.code}>{currentLanguage.code.toUpperCase()}</span>
-                <span className={styles.arrow}>{isOpen ? '▲' : '▼'}</span>
+                <span className={styles.flagIcon}>{currentLanguage.flag}</span>
+                <span className={styles.languageCode}>{currentLanguage.code.toUpperCase()}</span>
+                <span className={`${styles.arrow} ${isOpen ? styles.arrowUp : ''}`}>▼</span>
             </button>
             
             {isOpen && (
                 <div className={styles.dropdown}>
-                    {languages.map(language => (
-                        <button
-                            key={language.code}
-                            className={`${styles.languageOption} ${currentLang === language.code ? styles.active : ''}`}
-                            onClick={() => handleLanguageChange(language.code)}
-                        >
-                            <span className={styles.flag}>{language.flag}</span>
-                            <span className={styles.name}>{language.name}</span>
-                        </button>
-                    ))}
+                    <ul className={styles.languageList}>
+                        {languages.map((lang) => (
+                            <li key={lang.code}>
+                                <button
+                                    className={`${styles.languageOption} ${
+                                        language === lang.code ? styles.active : ''
+                                    }`}
+                                    onClick={() => handleLanguageChange(lang.code)}
+                                >
+                                    <span className={styles.flagIcon}>{lang.flag}</span>
+                                    <span className={styles.languageName}>{lang.name}</span>
+                                    {language === lang.code && (
+                                        <span className={styles.checkmark}>✓</span>
+                                    )}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             )}
         </div>

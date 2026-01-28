@@ -98,6 +98,21 @@
     }
 }
 
+@keyframes expandOut {
+    0% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.9);
+    }
+}
+
+.searchForm.closing {
+    animation: expandOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .searchForm {

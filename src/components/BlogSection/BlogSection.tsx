@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react';
 import styles from './BlogSection.module.css';
 import { OptimizedImage } from '../OptimizedImage';
+import { ShareButtons } from '../ShareButtons';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface BlogPost {
     id: number;
@@ -11,6 +13,7 @@ interface BlogPost {
 }
 
 export const BlogSection = () => {
+    const { t } = useLanguage();
     // State management cho active blog
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -77,7 +80,7 @@ export const BlogSection = () => {
     return (
         <section id="blog" className={styles.blogSection}>
             <div className={styles.container}>
-                <h2 className={styles.sectionTitle}>BLOGS OF BUCHAOH</h2>
+                <h2 className={styles.sectionTitle}>{t('blog.sectionTitle')}</h2>
 
                 {/* Horizontal scroll container with hidden scrollbar */}
                 <div className={`${styles.scrollContainer} no-scrollbar`} ref={scrollContainerRef}>
@@ -113,7 +116,14 @@ export const BlogSection = () => {
                                     {post.excerpt && (
                                         <p className={styles.blogExcerpt}>{post.excerpt}</p>
                                     )}
-                                    <button className={styles.readMore}>Đọc thêm →</button>
+                                    <div className={styles.blogActions}>
+                                        <button className={styles.readMore}>{t('blog.readMore')}</button>
+                                        <ShareButtons 
+                                            url={`${window.location.origin}/blog/${post.id}`}
+                                            title={post.title}
+                                            className={styles.shareButtons}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         ))}

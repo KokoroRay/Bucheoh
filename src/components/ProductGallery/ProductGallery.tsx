@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './ProductGallery.module.css';
 
 interface Product {
@@ -12,6 +13,7 @@ interface Product {
 }
 
 export const ProductGallery = () => {
+    const { t } = useLanguage();
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [activeFilter, setActiveFilter] = useState<'all' | 'drink' | 'fertilizer'>('all');
@@ -21,50 +23,50 @@ export const ProductGallery = () => {
     const products: Product[] = [
         { 
             id: 1, 
-            title: 'BUCHAOH Original',
-            description: 'Nước trái cây lên men nguyên chất, vị chua ngọt tự nhiên',
-            price: '45,000đ',
-            features: ['100% tự nhiên', 'Men vi sinh có lợi', 'Không chất bảo quản'],
+            title: t('product.drink1.title'),
+            description: t('product.drink1.desc'),
+            price: '75,000đ',
+            features: [t('feature.natural'), t('feature.noPreservatives'), t('feature.richProbiotics')],
             type: 'drink'
         },
         { 
             id: 2, 
-            title: 'BUCHAOH Honey',
-            description: 'Nước trái cây lên men pha mật ong, bổ dưỡng và thơm ngon',
-            price: '55,000đ',
-            features: ['Pha mật ong thật', 'Giàu enzyme', 'Tốt cho tiêu hóa'],
+            title: t('product.drink2.title'),
+            description: t('product.drink2.desc'),
+            price: '85,000đ',
+            features: [t('feature.liveProbiotics'), t('feature.goodDigestion'), t('feature.noSugar')],
             type: 'drink'
         },
         { 
             id: 3, 
-            title: 'BUCHAOH Mix Berry',
-            description: 'Hỗn hợp trái cây lên men với berry, nhiều vitamin',
-            price: '50,000đ',
-            features: ['Mix berry tươi', 'Vitamin C cao', 'Chống oxy hóa'],
+            title: t('product.drink3.title'),
+            description: t('product.drink3.desc'),
+            price: '65,000đ',
+            features: [t('feature.originalFormula'), t('feature.richFlavor'), t('feature.fermented30Days')],
             type: 'drink'
         },
         { 
             id: 4, 
-            title: 'Phân Vi Sinh BUCHAOH',
-            description: 'Phân bón vi sinh từ bã trái cây lên men',
+            title: t('product.fert1.title'),
+            description: t('product.fert1.desc'),
             price: '120,000đ',
-            features: ['Cải tạo đất', 'Vi sinh hữu ích', 'Hữu cơ 100%'],
+            features: [t('feature.organic100'), t('feature.improveSoil'), t('feature.increaseYield')],
             type: 'fertilizer'
         },
         { 
             id: 5, 
-            title: 'BUCHAOH Tropical',
-            description: 'Nước lên men từ trái cây nhiệt đới tươi ngon',
-            price: '48,000đ',
-            features: ['Trái cây nhiệt đới', 'Vitamin A, C', 'Mát gan, thanh nhiệt'],
-            type: 'drink'
+            title: t('product.fert2.title'),
+            description: t('product.fert2.desc'),
+            price: '95,000đ',
+            features: [t('feature.beneficialMicrobes'), t('feature.restoreSoil'), t('feature.biologicalSafety')],
+            type: 'fertilizer'
         },
         { 
             id: 6, 
-            title: 'Phân Lỏng BUCHAOH',
-            description: 'Dung dịch vi sinh lỏng dễ sử dụng cho cây trồng',
+            title: t('product.fert3.title'),
+            description: t('product.fert3.desc'),
             price: '85,000đ',
-            features: ['Dạng lỏng', 'Hấp thu nhanh', 'Phù hợp thủy canh'],
+            features: [t('feature.liquidForm'), t('feature.fastAbsorption'), t('feature.hydroponicSuitable')],
             type: 'fertilizer'
         },
     ];
@@ -114,9 +116,9 @@ export const ProductGallery = () => {
         <section id="products" className={styles.productGallery}>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <h2 className={styles.sectionTitle}>SẢN PHẨM BUCHAOH</h2>
+                    <h2 className={styles.sectionTitle}>{t('products.title')}</h2>
                     <p className={styles.sectionSubtitle}>
-                        Khám phá dòng sản phẩm từ nước trái cây lên men và phân vi sinh tự nhiên
+                        {t('products.subtitle')}
                     </p>
                 </div>
 
@@ -127,21 +129,21 @@ export const ProductGallery = () => {
                         onClick={() => handleFilterChange('all')}
                     >
                         <span className={styles.filterIcon}>🌟</span>
-                        Tất cả sản phẩm
+                        {t('products.all')}
                     </button>
                     <button 
                         className={`${styles.filterTab} ${activeFilter === 'drink' ? styles.active : ''}`}
                         onClick={() => handleFilterChange('drink')}
                     >
                         <span className={styles.filterIcon}>🥤</span>
-                        Nước uống lên men
+                        {t('products.drinks')}
                     </button>
                     <button 
                         className={`${styles.filterTab} ${activeFilter === 'fertilizer' ? styles.active : ''}`}
                         onClick={() => handleFilterChange('fertilizer')}
                     >
                         <span className={styles.filterIcon}>🌱</span>
-                        Phân vi sinh
+                        {t('products.fertilizers')}
                     </button>
                 </div>
 
@@ -168,7 +170,7 @@ export const ProductGallery = () => {
                                             </span>
                                         </div>
                                         <div className={styles.typeTag}>
-                                            {product.type === 'drink' ? 'Nước uống' : 'Phân bón'}
+                                            {product.type === 'drink' ? t('ui.drinkType') : t('ui.fertType')}
                                         </div>
                                     </div>
                                     <div className={styles.cardBody}>
@@ -184,11 +186,11 @@ export const ProductGallery = () => {
 
                 {/* CTA Section */}
                 <div className={styles.ctaSection}>
-                    <h3>Quan tâm đến sản phẩm BUCHAOH?</h3>
-                    <p>Liên hệ với chúng tôi để được tư vấn và báo giá chi tiết</p>
+                    <h3>{t('products.interest')}</h3>
+                    <p>{t('products.consult')}</p>
                     <div className={styles.ctaButtons}>
-                        <button className={styles.primaryCta}>Liên hệ ngay</button>
-                        <button className={styles.secondaryCta}>Tải catalog</button>
+                        <button className={styles.primaryCta}>{t('products.contact')}</button>
+                        <button className={styles.secondaryCta}>{t('products.catalog')}</button>
                     </div>
                 </div>
             </div>
@@ -219,7 +221,7 @@ export const ProductGallery = () => {
                                 <p className={styles.modalDescription}>{selectedProduct.description}</p>
                                 
                                 <div className={styles.modalFeatures}>
-                                    <h3>Đặc điểm nổi bật:</h3>
+                                    <h3>{t('ui.features')}</h3>
                                     <ul>
                                         {selectedProduct.features.map((feature, idx) => (
                                             <li key={idx}>{feature}</li>
@@ -232,10 +234,10 @@ export const ProductGallery = () => {
                         {/* Actions */}
                         <div className={styles.modalActions}>
                             <button className={styles.modalBuyButton}>
-                                📞 Đặt mua ngay
+                                📞 {t('ui.orderNow')}
                             </button>
                             <button className={styles.modalContactButton}>
-                                💬 Liên hệ tư vấn
+                                💬 {t('ui.contactSupport')}
                             </button>
                         </div>
                     </div>

@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './Header.module.css';
 import { 
     FaBars, 
@@ -6,12 +8,8 @@ import {
     FaHome, 
     FaInfoCircle, 
     FaBoxOpen, 
-    FaCog, 
     FaNewspaper, 
-    FaEnvelope,
-    FaHeart,
-    FaStore,
-    FaLeaf
+    FaEnvelope
 } from 'react-icons/fa';
 import { SearchBox } from '../SearchBox';
 import { LanguageSwitcher } from '../LanguageSwitcher';
@@ -21,6 +19,7 @@ interface HeaderProps {
 }
 
 export const Header = ({ logoSrc }: HeaderProps) => {
+    const { t } = useLanguage();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -66,16 +65,26 @@ export const Header = ({ logoSrc }: HeaderProps) => {
         // Could filter products, blog posts, etc.
     };
 
+    const handleScrollToSection = (href: string) => {
+        if (href.startsWith('#')) {
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    };
+
     const navItems = [
-        { label: 'TRANG CHỦ', href: '#home', icon: FaHome },
-        { label: 'GIỚI THIỆU', href: '#about', icon: FaInfoCircle },
-        { label: 'SẢN PHẨM', href: '#products', icon: FaBoxOpen },
-        { label: 'NƯỚC ÉP TRÁI CÂY', href: '#fruit-juice', icon: FaLeaf },
-        { label: 'SẢN PHẨM YÊU THÍCH', href: '#favorites', icon: FaHeart },
-        { label: 'CỬA HÀNG', href: '#store', icon: FaStore },
-        { label: 'QUY TRÌNH', href: '#process', icon: FaCog },
-        { label: 'TIN TỨC', href: '#news', icon: FaNewspaper },
-        { label: 'LIÊN HỆ', href: '#contact', icon: FaEnvelope },
+        { label: t('nav.home'), href: '/', icon: FaHome },
+        { label: t('nav.products'), href: '#products', icon: FaBoxOpen },
+        { label: t('nav.about'), href: '/about', icon: FaInfoCircle },
+        { label: t('nav.blog'), href: '/blog', icon: FaNewspaper },
+        { label: t('nav.faq'), href: '/faq', icon: FaInfoCircle },
+        { label: t('nav.contact'), href: '/contact', icon: FaEnvelope },
     ];
 
     return (
@@ -95,19 +104,38 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                 {/* Desktop Navigation */}
                 <nav className={styles.desktopNav}>
                     <ul className={styles.desktopNavList}>
-                        {navItems.slice(0, 6).map((item) => (
-                            <li key={item.label}>
-                                <a href={item.href} className={styles.navLink}>
-                                    {item.label}
-                                </a>
-                            </li>
-                        ))}
+                        {navItems.map((item) => {
+                            const isExternalLink = item.href.startsWith('#');
+                            return (
+                                <li key={item.label}>
+                                    {isExternalLink ? (
+                                        <button 
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleScrollToSection(item.href);
+                                            }}
+                                            className={styles.navLink}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                                        >
+                                            {item.label}
+                                        </button>
+                                    ) : (
+                                        <Link to={item.href} className={styles.navLink}>
+                                            {item.label}
+                                        </Link>
+                                    )}
+                                </li>
+                            );
+                        })}
                     </ul>
                 </nav>
 
                 {/* Search Box */}
                 <div className={styles.searchContainer}>
-                    <SearchBox onSearch={handleSearch} />
+                    <SearchBox 
+                        onSearch={handleSearch} 
+                        placeholder={t('ui.search')} 
+                    />
                 </div>
 
                 {/* Language Switcher */}
@@ -127,18 +155,36 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                 {/* Mobile Navigation */}
                 <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
                     <ul className={styles.navList}>
-                        {navItems.map((item) => (
-                            <li key={item.label}>
-                                <a
-                                    href={item.href}
-                                    className={styles.navLink}
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    <item.icon className={styles.navIcon} />
-                                    <span className={styles.navText}>{item.label}</span>
-                                </a>
-                            </li>
-                        ))}
+                        {navItems.map((item) => {
+                            const isExternalLink = item.href.startsWith('#');
+                            return (
+                                <li key={item.label}>
+                                    {isExternalLink ? (
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleScrollToSection(item.href);
+                                                setIsMenuOpen(false);
+                                            }}
+                                            className={styles.navLink}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}
+                                        >
+                                            <item.icon className={styles.navIcon} />
+                                            <span className={styles.navText}>{item.label}</span>
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            to={item.href}
+                                            className={styles.navLink}
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            <item.icon className={styles.navIcon} />
+                                            <span className={styles.navText}>{item.label}</span>
+                                        </Link>
+                                    )}
+                                </li>
+                            );
+                        })}
                     </ul>
                 </nav>
             </div>

@@ -1,4 +1,5 @@
 import styles from './AboutSection.module.css';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface AboutSectionProps {
     leftImageSrc?: string;
@@ -9,6 +10,8 @@ export const AboutSection = ({
     leftImageSrc,
     bottomImageSrc,
 }: AboutSectionProps) => {
+    const { t } = useLanguage();
+    
     return (
         <section id="about" className={styles.aboutSection}>
             <div className={styles.container}>
@@ -23,82 +26,80 @@ export const AboutSection = ({
                     {/* Content */}
                     <div className={styles.content}>
                         <h2 className={styles.title}>
-                            BUCHAOH – Nước Trái Cây Lên Men Từ Men Vi Sinh
+                            {t('about.title')}
                         </h2>
 
                         <div className={styles.highlight}>
                             <p className={styles.tagline}>
-                                "Từ trái cây tự nhiên đến giải pháp sức khỏe và môi trường"
+                                {t('about.tagline')}
                             </p>
                         </div>
 
                         <p className={styles.description}>
-                            BUCHAOH là sản phẩm nước trái cây lên men từ men vi sinh, được tạo ra thông qua quá trình lên men sinh học có kiểm soát. 
-                            Sử dụng trái cây làm nguyên liệu chính và hệ vi sinh vật có lợi để tạo thành sản phẩm mang đặc tính chức năng rõ rệt.
+                            {t('about.description')}
                         </p>
 
                         <div className={styles.features}>
                             <div className={styles.feature}>
                                 <div className={styles.featureIcon}>🥤</div>
                                 <div className={styles.featureContent}>
-                                    <h3>Nước Uống Lên Men</h3>
-                                    <p>Giải khát, chăm sóc sức khỏe và làm đẹp tự nhiên</p>
+                                    <h3>{t('about.drinkTitle')}</h3>
+                                    <p>{t('about.drinkDesc')}</p>
                                 </div>
                             </div>
                             <div className={styles.feature}>
                                 <div className={styles.featureIcon}>🌱</div>
                                 <div className={styles.featureContent}>
-                                    <h3>Phân Vi Sinh</h3>
-                                    <p>Cải tạo đất, giảm phụ thuộc phân hóa học</p>
+                                    <h3>{t('about.fertTitle')}</h3>
+                                    <p>{t('about.fertDesc')}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className={styles.values}>
-                            <h3 className={styles.valuesTitle}>Tại Sao Chọn Trái Cây?</h3>
+                            <h3 className={styles.valuesTitle}>{t('about.whyFruit')}</h3>
                             <div className={styles.valueGrid}>
                                 <div className={styles.valueItem}>
                                     <span className={styles.valueIcon}>⚗️</span>
                                     <div>
-                                        <strong>Kỹ thuật:</strong> Giàu đường tự nhiên, axit hữu cơ phù hợp lên men
+                                        <strong>{t('about.technical')}</strong>
                                     </div>
                                 </div>
                                 <div className={styles.valueItem}>
                                     <span className={styles.valueIcon}>🌾</span>
                                     <div>
-                                        <strong>Nguồn cung:</strong> Dễ tìm, tính mùa vụ rõ ràng, chủ động nguyên liệu
+                                        <strong>{t('about.supply')}</strong>
                                     </div>
                                 </div>
                                 <div className={styles.valueItem}>
                                     <span className={styles.valueIcon}>🇻🇳</span>
                                     <div>
-                                        <strong>Văn hóa:</strong> Gắn liền với ẩm thực Việt, gần gũi dễ đón nhận
+                                        <strong>{t('about.culture')}</strong>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div className={styles.circularEconomy}>
-                            <h3 className={styles.circularTitle}>Mô Hình Kinh Tế Tuần Hoàn</h3>
+                            <h3 className={styles.circularTitle}>{t('about.circularEconomy')}</h3>
                             <div className={styles.processFlow}>
                                 <div className={styles.flowItem}>
                                     <span className={styles.flowIcon}>🥭</span>
-                                    <span className={styles.flowText}>Trái cây tươi + Men vi sinh</span>
+                                    <span className={styles.flowText}>{t('about.freshFruit')}</span>
                                 </div>
                                 <div className={styles.flowArrow}>→</div>
                                 <div className={styles.flowItem}>
                                     <span className={styles.flowIcon}>🥤</span>
-                                    <span className={styles.flowText}>Nước uống lên men</span>
+                                    <span className={styles.flowText}>{t('about.fermentedDrink')}</span>
                                 </div>
                                 <div className={styles.flowArrow}>+</div>
                                 <div className={styles.flowItem}>
                                     <span className={styles.flowIcon}>🌱</span>
-                                    <span className={styles.flowText}>Phân vi sinh từ bã</span>
+                                    <span className={styles.flowText}>{t('about.bioFertilizer')}</span>
                                 </div>
                             </div>
                             <p className={styles.circularDesc}>
-                                Tận dụng toàn bộ vòng đời nguyên liệu, biến nông sản thô thành sản phẩm chăm sóc sức khỏe 
-                                và tái tạo giá trị cho đất, cây trồng - không tạo chất thải.
+                                {t('about.circularDesc')}
                             </p>
                         </div>
 

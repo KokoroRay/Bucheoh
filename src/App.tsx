@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './layouts';
 import { Hero, AboutSection, ProductGallery, BlogSection, LoadingSpinner, NotFound } from './components';
+import { ContactPage, FAQPage, BlogPage } from './pages';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { useState, useEffect } from 'react';
 
 // Import images from assets
@@ -42,18 +44,21 @@ function App() {
   }
 
   return (
-    <Router>
-      <MainLayout logoSrc={logoImage}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/Bucheoh" element={<HomePage />} />
-          <Route path="/about" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>Về BUCHAOH</h1><p>Coming soon...</p></div>} />
-          <Route path="/products" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>Sản phẩm BUCHAOH</h1><p>Coming soon...</p></div>} />
-          <Route path="/contact" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>Liên hệ</h1><p>Coming soon...</p></div>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </MainLayout>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <MainLayout logoSrc={logoImage}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>Sản phẩm BUCHAOH</h1><p>Coming soon...</p></div>} />
+            <Route path="/about" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>Về BUCHAOH</h1><p>Coming soon...</p></div>} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </MainLayout>
+      </Router>
+    </LanguageProvider>
   );
 }
 
