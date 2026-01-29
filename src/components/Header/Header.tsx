@@ -23,6 +23,8 @@ export const Header = ({ logoSrc }: HeaderProps) => {
     const navigate = useNavigate();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+    const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -84,13 +86,18 @@ export const Header = ({ logoSrc }: HeaderProps) => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleProductsClick = () => {
-        navigate('/', { state: { scrollToProducts: true } });
-    };
-
     const navItems = [
         { label: t('nav.home'), href: '/', icon: FaHome },
-        { label: t('nav.products'), href: '#products', icon: FaBoxOpen },
+        { 
+            label: t('nav.products'),
+            href: '#products',
+            icon: FaBoxOpen,
+            hasDropdown: true,
+            dropdownItems: [
+                { label: t('nav.products.drinks'), href: '/products/nuoc' },
+                { label: t('nav.products.fertilizers'), href: '/products/phan' },
+            ]
+        },
         { label: t('nav.about'), href: '/about', icon: FaInfoCircle },
         { label: t('nav.blog'), href: '/blog', icon: FaNewspaper },
         { label: t('nav.faq'), href: '/faq', icon: FaInfoCircle },
@@ -118,17 +125,25 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                             const isProducts = item.href === '#products';
                             const isExternalLink = item.href.startsWith('#');
                             return (
-                                <li key={item.label}>
+                                <li
+                                    key={item.label}
+                                    className={item.hasDropdown ? styles.hasDropdown : ''}
+                                    onMouseEnter={() => item.hasDropdown && setIsProductsDropdownOpen(true)}
+                                    onMouseLeave={() => item.hasDropdown && setIsProductsDropdownOpen(false)}
+                                >
                                     {isProducts ? (
-                                        <button 
-                                            onClick={handleProductsClick}
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setIsProductsDropdownOpen((prev) => !prev);
+                                            }}
                                             className={styles.navLink}
                                             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem 0' }}
                                         >
                                             {item.label}
                                         </button>
                                     ) : isExternalLink ? (
-                                        <button 
+                                        <button
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 handleScrollToSection(item.href);
@@ -139,7 +154,7 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                                             {item.label}
                                         </button>
                                     ) : isHome ? (
-                                        <button 
+                                        <button
                                             onClick={handleHomeClick}
                                             className={styles.navLink}
                                             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem 0' }}
@@ -150,6 +165,20 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                                         <Link to={item.href} className={styles.navLink}>
                                             {item.label}
                                         </Link>
+                                    )}
+
+                                    {item.hasDropdown && isProductsDropdownOpen && (
+                                        <div className={styles.dropdown}>
+                                            {item.dropdownItems?.map((drop) => (
+                                                <Link
+                                                    key={drop.href}
+                                                    to={drop.href}
+                                                    className={styles.dropdownItem}
+                                                >
+                                                    {drop.label}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     )}
                                 </li>
                             );
@@ -189,18 +218,33 @@ export const Header = ({ logoSrc }: HeaderProps) => {
                             return (
                                 <li key={item.label}>
                                     {isProducts ? (
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                handleProductsClick();
-                                                setIsMenuOpen(false);
-                                            }}
-                                            className={styles.navLink}
-                                            style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}
-                                        >
-                                            <item.icon className={styles.navIcon} />
-                                            <span className={styles.navText}>{item.label}</span>
-                                        </button>
+                                        <div className={styles.mobileDropdown}>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setIsMobileProductsOpen((prev) => !prev);
+                                                }}
+                                                className={styles.navLink}
+                                                style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}
+                                            >
+                                                <item.icon className={styles.navIcon} />
+                                                <span className={styles.navText}>{item.label}</span>
+                                            </button>
+                                            {isMobileProductsOpen && (
+                                                <div className={styles.mobileDropdownList}>
+                                                    {item.dropdownItems?.map((drop) => (
+                                                        <Link
+                                                            key={drop.href}
+                                                            to={drop.href}
+                                                            className={styles.mobileDropdownItem}
+                                                            onClick={() => setIsMenuOpen(false)}
+                                                        >
+                                                            {drop.label}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
                                     ) : isExternalLink ? (
                                         <button
                                             onClick={(e) => {

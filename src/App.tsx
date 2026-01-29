@@ -1,13 +1,13 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './layouts';
 import { Hero, AboutSection, ProductGallery, BlogSection, LoadingSpinner, NotFound } from './components';
-import { ContactPage, FAQPage, BlogPage } from './pages';
+import { ContactPage, FAQPage, BlogPage, AboutBuchaohPage, ProductListPage, ProductDetailPage } from './pages';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Import images from assets
-import logoImage from './assets/logos/fpt-logo.png';
+import logoImage from './assets/logos/Logo.png';
 import heroImage from './assets/images/hero/hero-image.png';
 import aboutImage1 from './assets/images/about/about-1.png';
 import aboutImage2 from './assets/images/about/about-2.png';
@@ -67,8 +67,9 @@ function App() {
         <MainLayout logoSrc={logoImage}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>Sản phẩm BUCHAOH</h1><p>Coming soon...</p></div>} />
-            <Route path="/about" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>Về BUCHAOH</h1><p>Coming soon...</p></div>} />
+            <Route path="/products/:category" element={<ProductListPage />} />
+            <Route path="/products/:category/:productId" element={<ProductDetailPage />} />
+            <Route path="/about" element={<AboutBuchaohPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/blog" element={<BlogPage />} />

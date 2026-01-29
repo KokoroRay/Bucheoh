@@ -11,7 +11,7 @@ interface FAQItem {
 }
 
 export const FAQPage = () => {
-    const { t, language } = useLanguage();
+    const { t } = useLanguage();
     const [activeId, setActiveId] = useState<number | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -19,62 +19,62 @@ export const FAQPage = () => {
     const faqData: FAQItem[] = [
         {
             id: 1,
-            question: 'BUCHAOH là gì?',
-            answer: 'BUCHAOH là sản phẩm nước trái cây lên men từ men vi sinh, được tạo ra thông qua quá trình lên men sinh học có kiểm soát. Sản phẩm sử dụng trái cây làm nguyên liệu chính và hệ vi sinh vật có lợi để tạo thành sản phẩm mang đặc tính chức năng rõ rệt.',
+            question: t('faq.q1'),
+            answer: t('faq.a1'),
             category: 'product'
         },
         {
             id: 2,
-            question: 'Sản phẩm có an toàn cho sức khỏe không?',
-            answer: 'Hoàn toàn an toàn. BUCHAOH được sản xuất theo quy trình lên men sinh học kiểm soát chặt chẽ, sử dụng men vi sinh có lợi và nguyên liệu trái cây tự nhiên. Sản phẩm không chứa chất bảo quản, màu tổng hợp hay hương liệu nhân tạo.',
+            question: t('faq.q2'),
+            answer: t('faq.a2'),
             category: 'health'
         },
         {
             id: 3,
-            question: 'Cách sử dụng BUCHAOH như thế nào?',
-            answer: 'Bạn có thể uống trực tiếp hoặc pha loãng với nước theo tỷ lệ 1:3. Nên uống vào buổi sáng trước bữa ăn hoặc sau bữa ăn 30 phút. Liều lượng khuyến nghị: 50-100ml/ngày cho người lớn.',
+            question: t('faq.q3'),
+            answer: t('faq.a3'),
             category: 'usage'
         },
         {
             id: 4,
-            question: 'Phân vi sinh từ bã trái cây có tác dụng gì?',
-            answer: 'Phân vi sinh từ bã trái cây giúp cải tạo đất, tăng độ màu mỡ, giảm phụ thuộc vào phân hóa học. Sản phẩm này tạo ra mô hình kinh tế tuần hoàn, tận dụng toàn bộ nguyên liệu mà không tạo ra chất thải.',
+            question: t('faq.q4'),
+            answer: t('faq.a4'),
             category: 'product'
         },
         {
             id: 5,
-            question: 'Tại sao chọn trái cây làm nguyên liệu?',
-            answer: 'Trái cây giàu đường tự nhiên và axit hữu cơ phù hợp cho quá trình lên men. Nguồn cung dễ tìm, tính mùa vụ rõ ràng giúp chủ động nguyên liệu. Hơn nữa, trái cây gắn liền với ẩm thực Việt Nam, gần gũi và dễ được đón nhận.',
+            question: t('faq.q5'),
+            answer: t('faq.a5'),
             category: 'product'
         },
         {
             id: 6,
-            question: 'Sản phẩm có được kiểm định chất lượng không?',
-            answer: 'Có, tất cả sản phẩm BUCHAOH đều được kiểm định chất lượng tại các phòng lab uy tín, đảm bảo tiêu chuẩn an toàn thực phẩm và có giấy chứng nhận từ Bộ Y tế.',
+            question: t('faq.q6'),
+            answer: t('faq.a6'),
             category: 'safety'
         },
         {
             id: 7,
-            question: 'Bảo quản sản phẩm như thế nào?',
-            answer: 'Bảo quản trong tủ lạnh ở nhiệt độ 2-8°C. Sau khi mở nắp, nên sử dụng trong vòng 3-5 ngày. Tránh để nơi có ánh sáng trực tiếp và nhiệt độ cao.',
+            question: t('faq.q7'),
+            answer: t('faq.a7'),
             category: 'usage'
         },
         {
             id: 8,
-            question: 'Ai không nên sử dụng sản phẩm?',
-            answer: 'Trẻ em dưới 1 tuổi, phụ nữ mang thai trong 3 tháng đầu, người có tiền sử dị ứng với trái cây nên tham khảo ý kiến bác sĩ trước khi sử dụng.',
+            question: t('faq.q8'),
+            answer: t('faq.a8'),
             category: 'health'
         },
         {
             id: 9,
-            question: 'Làm thế nào để đặt hàng?',
-            answer: 'Bạn có thể đặt hàng qua website, gọi hotline, hoặc đến trực tiếp cửa hàng. Chúng tôi hỗ trợ giao hàng toàn quốc với phí ship ưu đãi.',
+            question: t('faq.q9'),
+            answer: t('faq.a9'),
             category: 'order'
         },
         {
             id: 10,
-            question: 'Chính sách đổi trả như thế nào?',
-            answer: 'Chúng tôi hỗ trợ đổi trả trong vòng 7 ngày kể từ ngày mua hàng nếu sản phẩm có lỗi từ nhà sản xuất. Sản phẩm phải còn nguyên vẹn bao bì và chưa sử dụng.',
+            question: t('faq.q10'),
+            answer: t('faq.a10'),
             category: 'order'
         }
     ];
@@ -84,8 +84,8 @@ export const FAQPage = () => {
         { value: 'product', label: t('faq.product') },
         { value: 'health', label: t('faq.health') },
         { value: 'usage', label: t('faq.usage') },
-        { value: 'safety', label: language === 'vi' ? 'An toàn' : 'Safety' },
-        { value: 'order', label: language === 'vi' ? 'Đặt hàng' : 'Order' }
+        { value: 'safety', label: t('faq.safety') },
+        { value: 'order', label: t('faq.order') }
     ];
 
     const toggleFAQ = (id: number) => {
@@ -139,7 +139,7 @@ export const FAQPage = () => {
                 <div className={styles.faqList}>
                     {filteredFAQs.length === 0 ? (
                         <div className={styles.noResults}>
-                            <p>Không tìm thấy câu hỏi phù hợp. Hãy thử từ khóa khác hoặc liên hệ với chúng tôi.</p>
+                            <p>{t('faq.noResults')}</p>
                         </div>
                     ) : (
                         filteredFAQs.map(faq => (

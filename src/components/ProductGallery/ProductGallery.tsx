@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './ProductGallery.module.css';
 
 interface Product {
     id: number;
+    slug: string;
     imageSrc?: string;
     title: string;
     description: string;
@@ -14,58 +16,81 @@ interface Product {
 
 export const ProductGallery = () => {
     const { t } = useLanguage();
-    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
     const [activeFilter, setActiveFilter] = useState<'all' | 'drink' | 'fertilizer'>('all');
     const carouselRef = useRef<HTMLDivElement>(null);
 
     // Danh sách sản phẩm BUCHAOH
     const products: Product[] = [
         { 
-            id: 1, 
+            id: 1,
+            slug: 'nuoc-khom-len-men',
             title: t('product.drink1.title'),
             description: t('product.drink1.desc'),
-            price: '75,000đ',
+            price: '32,000đ',
             features: [t('feature.natural'), t('feature.noPreservatives'), t('feature.richProbiotics')],
             type: 'drink'
         },
         { 
-            id: 2, 
+            id: 2,
+            slug: 'nuoc-tao-xanh-len-men',
             title: t('product.drink2.title'),
             description: t('product.drink2.desc'),
-            price: '85,000đ',
+            price: '32,000đ',
             features: [t('feature.liveProbiotics'), t('feature.goodDigestion'), t('feature.noSugar')],
             type: 'drink'
         },
         { 
-            id: 3, 
+            id: 3,
+            slug: 'nuoc-thanh-long-len-men',
             title: t('product.drink3.title'),
             description: t('product.drink3.desc'),
-            price: '65,000đ',
+            price: '32,000đ',
             features: [t('feature.originalFormula'), t('feature.richFlavor'), t('feature.fermented30Days')],
             type: 'drink'
         },
         { 
-            id: 4, 
+            id: 4,
+            slug: 'nuoc-gung-len-men',
+            title: t('product.drink4.title'),
+            description: t('product.drink4.desc'),
+            price: '32,000đ',
+            features: [t('feature.natural'), t('feature.antiInflammatory'), t('feature.immunityBoost')],
+            type: 'drink'
+        },
+        { 
+            id: 5,
+            slug: 'nuoc-buoi-len-men',
+            title: t('product.drink5.title'),
+            description: t('product.drink5.desc'),
+            price: '32,000đ',
+            features: [t('feature.weightLoss'), t('feature.detox'), t('feature.cholesterolBalance')],
+            type: 'drink'
+        },
+        { 
+            id: 6,
+            slug: 'phan-vi-sinh-tong-hop',
             title: t('product.fert1.title'),
             description: t('product.fert1.desc'),
-            price: '120,000đ',
+            price: '30,000đ',
             features: [t('feature.organic100'), t('feature.improveSoil'), t('feature.increaseYield')],
             type: 'fertilizer'
         },
         { 
-            id: 5, 
+            id: 7,
+            slug: 'phan-vi-sinh-cho-rau',
             title: t('product.fert2.title'),
             description: t('product.fert2.desc'),
-            price: '95,000đ',
+            price: '30,000đ',
             features: [t('feature.beneficialMicrobes'), t('feature.restoreSoil'), t('feature.biologicalSafety')],
             type: 'fertilizer'
         },
         { 
-            id: 6, 
+            id: 8,
+            slug: 'phan-vi-sinh-cho-cay-an-trai',
             title: t('product.fert3.title'),
             description: t('product.fert3.desc'),
-            price: '85,000đ',
+            price: '30,000đ',
             features: [t('feature.liquidForm'), t('feature.fastAbsorption'), t('feature.hydroponicSuitable')],
             type: 'fertilizer'
         },
@@ -82,34 +107,12 @@ export const ProductGallery = () => {
 
     // Handle click on product card
     const handleProductClick = (product: Product) => {
-        setSelectedProduct(product);
-        setShowModal(true);
-        
-        // Pause carousel animation when clicked
-        if (carouselRef.current) {
-            carouselRef.current.style.animationPlayState = 'paused';
-        }
-    };
-
-    const handleCloseModal = () => {
-        setShowModal(false);
-        setSelectedProduct(null);
-        
-        // Resume carousel animation
-        if (carouselRef.current) {
-            carouselRef.current.style.animationPlayState = 'running';
-        }
+        const category = product.type === 'drink' ? 'nuoc' : 'phan';
+        navigate(`/products/${category}/${product.slug}`);
     };
 
     const handleFilterChange = (filter: 'all' | 'drink' | 'fertilizer') => {
         setActiveFilter(filter);
-        setSelectedProduct(null);
-        setShowModal(false);
-        
-        // Resume animation when filter changes
-        if (carouselRef.current) {
-            carouselRef.current.style.animationPlayState = 'running';
-        }
     };
 
     return (
@@ -194,55 +197,6 @@ export const ProductGallery = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Product Detail Modal */}
-            {showModal && selectedProduct && (
-                <div className={styles.modalOverlay} onClick={handleCloseModal}>
-                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                        <button className={styles.modalClose} onClick={handleCloseModal}>
-                            ×
-                        </button>
-                        
-                        {/* Product Image Section */}
-                        <div className={styles.modalHeader}>
-                            <div className={styles.modalIcon}>
-                                {selectedProduct.type === 'drink' ? '🥤' : '🌱'}
-                            </div>
-                        </div>
-                        
-                        {/* Product Info Section */}
-                        <div className={styles.modalInfo}>
-                            <div className={styles.modalInfoHeader}>
-                                <h2 className={styles.modalTitle}>{selectedProduct.title}</h2>
-                                <div className={styles.modalPrice}>{selectedProduct.price}</div>
-                            </div>
-                            
-                            <div className={styles.modalBody}>
-                                <p className={styles.modalDescription}>{selectedProduct.description}</p>
-                                
-                                <div className={styles.modalFeatures}>
-                                    <h3>{t('ui.features')}</h3>
-                                    <ul>
-                                        {selectedProduct.features.map((feature, idx) => (
-                                            <li key={idx}>{feature}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        {/* Actions */}
-                        <div className={styles.modalActions}>
-                            <button className={styles.modalBuyButton}>
-                                📞 {t('ui.orderNow')}
-                            </button>
-                            <button className={styles.modalContactButton}>
-                                💬 {t('ui.contactSupport')}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </section>
     );
 };

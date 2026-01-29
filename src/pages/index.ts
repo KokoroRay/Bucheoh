@@ -3,3 +3,6 @@ export { NotFoundPage } from './NotFound';
 export { ContactPage } from './Contact/ContactPage';
 export { FAQPage } from './FAQ/FAQPage';
 export { BlogPage } from './Blog/BlogPage';
+export { AboutBuchaohPage } from './AboutBuchaohPage';
+export { ProductListPage } from './ProductList';
+export { ProductDetailPage } from './ProductDetail';

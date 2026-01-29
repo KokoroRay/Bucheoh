@@ -1,5 +1,5 @@
 // Logos
-export { default as fptLogo } from './logos/fpt-logo.png';
+export { default as bucheohLogo } from './logos/Logo.png';
 
 // Hero Images
 export { default as heroImage } from './images/hero/hero-image.png';

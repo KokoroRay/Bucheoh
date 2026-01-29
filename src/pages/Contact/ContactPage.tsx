@@ -53,7 +53,7 @@ export const ContactPage = () => {
         }
 
         if (formData.phone && !/^[0-9+\-\s()]+$/.test(formData.phone)) {
-            newErrors.phone = t('contact.emailInvalid');
+            newErrors.phone = t('contact.phoneInvalid');
         }
 
         setErrors(newErrors);
@@ -109,13 +109,13 @@ export const ContactPage = () => {
                 <div className={styles.container}>
                     <div className={styles.successMessage}>
                         <div className={styles.successIcon}>✓</div>
-                        <h2>{t('contact.success')}</h2>
-                        <p>{t('contact.success')}</p>
+                        <h2>{t('contact.successMessage')}</h2>
+                        <p>{t('contact.successDetail')}</p>
                         <button 
                             className={styles.backButton}
                             onClick={() => setSubmitted(false)}
                         >
-                            {t('contact.send')}
+                            {t('contact.backButton')}
                         </button>
                     </div>
                 </div>
@@ -156,14 +156,14 @@ export const ContactPage = () => {
                         <div className={styles.contactItem}>
                             <FaPhone className={styles.icon} />
                             <div>
-                                <h4>Điện thoại</h4>
+                                <h4>{t('contact.phoneLabel')}</h4>
                                 <p>+84 123 456 789</p>
                             </div>
                         </div>
 
                         <div className={styles.workingHours}>
-                            <h4>Giờ làm việc</h4>
-                            <p>Thứ 2 - Thứ 6: 8:00 - 17:00<br />Thứ 7: 8:00 - 12:00<br />Chủ nhật: Nghỉ</p>
+                            <h4>{t('contact.workingHoursTitle')}</h4>
+                            <p dangerouslySetInnerHTML={{ __html: t('contact.workingHoursText') }} />
                         </div>
                     </div>
 
@@ -171,7 +171,7 @@ export const ContactPage = () => {
                         <form onSubmit={handleSubmit}>
                             <div className={styles.formRow}>
                                 <div className={styles.formGroup}>
-                                    <label htmlFor="name">Họ và tên *</label>
+                                    <label htmlFor="name">{t('contact.name')} *</label>
                                     <input
                                         type="text"
                                         id="name"
@@ -179,13 +179,13 @@ export const ContactPage = () => {
                                         value={formData.name}
                                         onChange={handleInputChange}
                                         className={errors.name ? styles.error : ''}
-                                        placeholder="Nhập họ và tên của bạn"
+                                        placeholder={t('contact.namePlaceholder')}
                                     />
                                     {errors.name && <span className={styles.errorText}>{errors.name}</span>}
                                 </div>
 
                                 <div className={styles.formGroup}>
-                                    <label htmlFor="email">Email *</label>
+                                    <label htmlFor="email">{t('contact.email')} *</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -193,7 +193,7 @@ export const ContactPage = () => {
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         className={errors.email ? styles.error : ''}
-                                        placeholder="Nhập địa chỉ email"
+                                        placeholder={t('contact.emailPlaceholder')}
                                     />
                                     {errors.email && <span className={styles.errorText}>{errors.email}</span>}
                                 </div>
@@ -201,7 +201,7 @@ export const ContactPage = () => {
 
                             <div className={styles.formRow}>
                                 <div className={styles.formGroup}>
-                                    <label htmlFor="phone">Số điện thoại</label>
+                                    <label htmlFor="phone">{t('contact.phone')}</label>
                                     <input
                                         type="tel"
                                         id="phone"
@@ -209,13 +209,13 @@ export const ContactPage = () => {
                                         value={formData.phone}
                                         onChange={handleInputChange}
                                         className={errors.phone ? styles.error : ''}
-                                        placeholder="Nhập số điện thoại (tùy chọn)"
+                                        placeholder={t('contact.phonePlaceholder')}
                                     />
                                     {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
                                 </div>
 
                                 <div className={styles.formGroup}>
-                                    <label htmlFor="subject">Chủ đề *</label>
+                                    <label htmlFor="subject">{t('contact.subject')} *</label>
                                     <select
                                         id="subject"
                                         name="subject"
@@ -223,19 +223,19 @@ export const ContactPage = () => {
                                         onChange={handleInputChange}
                                         className={errors.subject ? styles.error : ''}
                                     >
-                                        <option value="">Chọn chủ đề</option>
-                                        <option value="product">Thông tin sản phẩm</option>
-                                        <option value="order">Đặt hàng</option>
-                                        <option value="support">Hỗ trợ kỹ thuật</option>
-                                        <option value="partnership">Hợp tác kinh doanh</option>
-                                        <option value="other">Khác</option>
+                                        <option value="">{t('contact.subjectSelect')}</option>
+                                        <option value="product">{t('contact.subjectProduct')}</option>
+                                        <option value="order">{t('contact.subjectOrder')}</option>
+                                        <option value="support">{t('contact.subjectSupport')}</option>
+                                        <option value="partnership">{t('contact.subjectPartnership')}</option>
+                                        <option value="other">{t('contact.subjectOther')}</option>
                                     </select>
                                     {errors.subject && <span className={styles.errorText}>{errors.subject}</span>}
                                 </div>
                             </div>
 
                             <div className={styles.formGroup}>
-                                <label htmlFor="message">Nội dung tin nhắn *</label>
+                                <label htmlFor="message">{t('contact.message')} *</label>
                                 <textarea
                                     id="message"
                                     name="message"
@@ -243,7 +243,7 @@ export const ContactPage = () => {
                                     onChange={handleInputChange}
                                     className={errors.message ? styles.error : ''}
                                     rows={6}
-                                    placeholder="Nhập nội dung tin nhắn của bạn..."
+                                    placeholder={t('contact.messageTextarea')}
                                 />
                                 {errors.message && <span className={styles.errorText}>{errors.message}</span>}
                             </div>
@@ -256,12 +256,12 @@ export const ContactPage = () => {
                                 {isSubmitting ? (
                                     <>
                                         <div className={styles.spinner}></div>
-                                        Đang gửi...
+                                        {t('contact.sending')}
                                     </>
                                 ) : (
                                     <>
                                         <FaPaperPlane />
-                                        Gửi tin nhắn
+                                        {t('contact.send')}
                                     </>
                                 )}
                             </button>
