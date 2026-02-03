@@ -42,7 +42,7 @@
 
 .title {
     font-size: clamp(1.75rem, 3vw, 2.25rem);
-    font-family: var(--font-secondary);
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: var(--color-primary);
     margin-bottom: var(--spacing-lg);
@@ -51,7 +51,7 @@
 
 .description {
     font-size: 1.125rem;
-    font-family: var(--font-secondary);
+    font-family: 'Montserrat', sans-serif;
     color: var(--color-black);
     line-height: 1.8;
     margin-bottom: var(--spacing-xl);
@@ -204,6 +204,7 @@
     color: var(--color-primary);
     font-size: 1.125rem;
     font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .features {
@@ -230,12 +231,17 @@
 .featureIcon {
     font-size: 3rem;
     line-height: 1;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .featureContent h3 {
     margin: 0 0 0.5rem 0;
     color: var(--color-gray-600);
     font-size: 1.125rem;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .featureContent p {
@@ -243,6 +249,7 @@
     color: var(--color-gray-500);
     font-size: 0.875rem;
     line-height: 1.5;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .values {
@@ -277,6 +284,10 @@
 .valueIcon {
     font-size: 1.5rem;
     line-height: 1;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .valueItem strong {
@@ -322,6 +333,10 @@
 .flowIcon {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .flowText {
