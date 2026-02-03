@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# BUCHAOH – Fermented Drinks & Bio-Fertilizer Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BUCHAOH is a bilingual (VI/EN) marketing website built with React + TypeScript + Vite. It showcases fermented fruit drinks, bio-fertilizer products, and BUCHAOH’s circular production process with modern UI, responsive layouts, and product detail pages.
 
-Currently, two official plugins are available:
+## ✨ Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Home page with Hero, About, Product Gallery, and Blog sections
+- Product catalog with details for fermented drinks and bio-fertilizers
+- i18n support (Vietnamese/English)
+- Responsive design across mobile and desktop
+- HashRouter for static hosting (GitHub Pages friendly)
 
-## React Compiler
+## 🧱 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18 + TypeScript
+- Vite
+- CSS Modules
+- React Router (HashRouter)
 
-## Expanding the ESLint configuration
+## 📦 Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  components/
+    AboutSection/
+    BlogSection/
+    Footer/
+    Header/
+    Hero/
+    ProductGallery/
+    ...
+  contexts/
+    LanguageContext.tsx
+  layouts/
+    MainLayout.tsx
+  pages/
+    AboutBuchaohPage/
+    Blog/
+    Contact/
+    FAQ/
+    ProductDetail/
+    ProductList/
+  styles/
+    globals.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### Run Dev Server
+
+```bash
+npm run dev
+```
+
+Vite will print the local URL in the terminal.
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview Build
+
+```bash
+npm run preview
+```
+
+## 🌍 Internationalization (VI/EN)
+
+Translations are defined in:
+
+- `src/contexts/LanguageContext.tsx`
+
+Use the `useLanguage()` hook and `t(key)` to render localized text.
+
+## 🧩 Notes
+
+- Routing uses `HashRouter` for easy static hosting.
+- All UI sections are built with CSS Modules for scoped styling.
+
+## 📄 License
+
+All rights reserved by BUCHAOH.
