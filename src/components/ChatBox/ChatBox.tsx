@@ -1,31 +1,8 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { ChatMessage } from '../../services/chatService';
 import { ChatService } from '../../services/chatService';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './ChatBox.module.css';
-
-// Helper function to parse and format message content
-const parseMessageContent = (content: string) => {
-    // Replace **text** with <strong>text</strong> for bold
-    return content
-        .replace(/\*\*(.*?)\*/g, '<strong>$1</strong>')
-        .split('\n')
-        .map((line, idx) => {
-            // Handle numbered lists: "1. " -> proper list format
-            if (/^\d+\.\s/.test(line.trim())) {
-                return <li key={idx}>{line.replace(/^\d+\.\s/, '')}</li>;
-            }
-            // Handle bullet lists: "* " -> proper list format
-            if (/^\*\s(?!\*)/.test(line.trim())) {
-                return <li key={idx}>{line.replace(/^\*\s/, '')}</li>;
-            }
-            // Handle empty lines as spacer
-            if (line.trim() === '') {
-                return <div key={idx} style={{ height: '8px' }} />;
-            }
-            return <div key={idx}>{line}</div>;
-        });
-};
 
 export const ChatBox = () => {
     const [isOpen, setIsOpen] = useState(false);
