@@ -11,3 +11,4 @@ export { BackToTop } from './BackToTop';
 export { LoadingSpinner } from './LoadingSpinner';
 export { NotFound } from './NotFound';
 export { LanguageSwitcher } from './LanguageSwitcher';
+export { ChatBox } from './ChatBox';

@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './layouts';
-import { Hero, AboutSection, ProductGallery, BlogSection, LoadingSpinner, NotFound } from './components';
+import { Hero, AboutSection, ProductGallery, BlogSection, LoadingSpinner, NotFound, ChatBox } from './components';
 import { ContactPage, FAQPage, BlogPage, AboutBuchaohPage, ProductListPage, ProductDetailPage } from './pages';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { useState, useEffect } from 'react';
@@ -76,6 +76,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MainLayout>
+        <ChatBox />
       </Router>
     </LanguageProvider>
   );

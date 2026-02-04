@@ -217,11 +217,23 @@ const translations = {
         'feature.noSugar': 'Không đường',
         'feature.originalFormula': 'Công thức gốc',
         'feature.richFlavor': 'Hương vị đậm đà',
-        'feature.fermented30Days': 'Lên men 30 ngày',        'feature.antiInflammatory': 'Chống viêm',
+        'feature.fermented30Days': 'Lên men 30 ngày',
+        
+        // Chat
+        'chat.title': 'Chat với BUCHAOH',
+        'chat.welcome': 'Xin chào! Có điều gì tôi có thể giúp bạn?',
+        'chat.placeholder': 'Nhập tin nhắn...',
+        'chat.send': 'Gửi',
+        'chat.thinking': 'Đang suy nghĩ...',
+        'chat.error': 'Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.',
+        
+        'feature.antiInflammatory': 'Chống viêm',
         'feature.immunityBoost': 'Tăng miễn dịch',
         'feature.weightLoss': 'Hỗ trợ giảm cân',
         'feature.detox': 'Giải độc',
-        'feature.cholesterolBalance': 'Cân bằng cholesterol',        'feature.organic100': '100% hữu cơ',
+        'feature.cholesterolBalance': 'Cân bằng cholesterol',
+        
+        'feature.organic100': '100% hữu cơ',
         'feature.improveSoil': 'Cải thiện đất',
         'feature.increaseYield': 'Tăng năng suất',
         'feature.beneficialMicrobes': 'Vi sinh có lợi',
@@ -458,6 +470,14 @@ const translations = {
         'feature.liquidForm': 'Liquid Form',
         'feature.fastAbsorption': 'Fast Absorption',
         'feature.hydroponicSuitable': 'Hydroponic Suitable',
+        
+        // Chat
+        'chat.title': 'Chat with BUCHAOH',
+        'chat.welcome': 'Hello! How can I help you?',
+        'chat.placeholder': 'Type your message...',
+        'chat.send': 'Send',
+        'chat.thinking': 'Thinking...',
+        'chat.error': 'Sorry, an error occurred. Please try again later.',
     }
 };
 
